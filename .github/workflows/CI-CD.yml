@@ -24,3 +24,12 @@ jobs:
       - name: Get Today Date
         id: date
         run : echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Get Folder Id by condition
+        uses: haya14busa/action-cond@v1
+        id: folderId
+        with:
+          cond: ${{ steps.barnch.outputs.branch == 'main' }}
+          if_true: ${{ secrets.MASTERFOLDERID }}
+          if_false: ${{ secrets.TESTFOLDERID }}
+      - run: flutter pub get
+      - run: flutter build apk
