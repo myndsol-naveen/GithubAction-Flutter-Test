@@ -42,7 +42,7 @@ jobs:
         uses: adityak74/google-drive-upload-git-action@main
         with:
           credentials: ${{ secrets.CREDENTIALS }}
-          filename: "build/app/outputs/apk/debug/app-debug.apk"
+          filename: "build/app/outputs/apk/release/app-release.apk"
           folderId: ${{ steps.folderId.outputs.value }}
           name: $ {{ steps.branch.outputs.branch }}_apk_${{ steps.date.outputs.date }}.apk
           overwrite: "true"
