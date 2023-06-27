@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Branch Name
-          id: branch
-          run: echo "::set-output name=branch::${GITHUB_REF##*/}"
+        id: branch
+        run: echo "::set-output name=branch::${GITHUB_REF##*/}"
       - name: Get SlackWebHook
         uses: haya14busa/action-cond@v1
         id: slackwebhook
