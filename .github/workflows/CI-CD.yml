@@ -28,7 +28,7 @@ jobs:
         uses: haya14busa/action-cond@v1
         id: folderId
         with:
-          cond: ${{ steps.barnch.outputs.branch == 'main' }}
+          cond: ${{ steps.branch.outputs.branch == 'main' }}
           if_true: ${{ secrets.MASTERFOLDERID }}
           if_false: ${{ secrets.TESTFOLDERID }}
       - run: flutter pub get
@@ -44,6 +44,6 @@ jobs:
           credentials: ${{ secrets.CREDENTIALS }}
           filename: "build/app/outputs/apk/release/app-release.apk"
           folderId: ${{ steps.folderId.outputs.value }}
-          name: $ {{steps.branch.outputs.branch}}_apk_${{ steps.date.outputs.date }}.apk
+          name: ${{steps.branch.outputs.branch}}_apk_${{ steps.date.outputs.date }}.apk
           overwrite: "true"
           mimeType: "application/vnd.android.package-archive"
