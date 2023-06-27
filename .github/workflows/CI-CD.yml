@@ -47,3 +47,20 @@ jobs:
           name: ${{steps.branch.outputs.branch}}_apk_${{ steps.date.outputs.date }}.apk
           overwrite: "true"
           mimeType: "application/vnd.android.package-archive"
+      - name: Get SlackWebHook
+        uses: haya14busa/action-cond@v1
+        id: slackwebhook
+        with:
+          cond: ${{ steps.branch.outputs.branch == 'main' }}
+          if_true: ${{ secrets.SLACK_WEBHOOK }}
+          if_false: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Notify on Slack
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: ${{ steps.branch.outputs.branch }}
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://img.freepik.com/premium-vector/lion-icon-logo-design-illustration_586739-163.jpg?w=1480
+          SLACK_MESSAGE: https://drive.google.com/drive/u/3/folders/${{ steps.folderId.outputs.value }}
+          SLACK_TITLE: Uploaded new ${{ steps.branch.outputs.apk }} APK
+          SLACK_USERNAME: Naveen
+          SLACK_WEBHOOK: ${{ steps.slackwebhook.outputs.value }}
