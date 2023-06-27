@@ -3,7 +3,7 @@ name: build_upload_notify
 on:
   push:
     branches:
-      - main
+#      - main
       - test
 
 jobs:
@@ -59,8 +59,8 @@ jobs:
         env:
           SLACK_CHANNEL: ${{ steps.branch.outputs.branch }}
           SLACK_COLOR: ${{ job.status }}
-          SLACK_ICON: https://img.freepik.com/premium-vector/lion-icon-logo-design-illustration_586739-163.jpg?w=1480
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
           SLACK_MESSAGE: https://drive.google.com/drive/u/3/folders/${{ steps.folderId.outputs.value }}
-          SLACK_TITLE: Uploaded new ${{ steps.branch.outputs.apk }} APK
+          SLACK_TITLE: Uploaded new ${{ steps.branch.outputs.branch }} APK
           SLACK_USERNAME: Naveen
           SLACK_WEBHOOK: ${{ steps.slackwebhook.outputs.value }}

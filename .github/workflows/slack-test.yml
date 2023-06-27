@@ -1,0 +1,33 @@
+name: notify
+
+on:
+  push:
+    branches:
+      #      - main
+      - main
+
+jobs:
+  notify:
+    name: notify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Branch Name
+          id: branch
+          run: echo "::set-output name=branch::${GITHUB_REF##*/}"
+      - name: Get SlackWebHook
+        uses: haya14busa/action-cond@v1
+        id: slackwebhook
+        with:
+          cond: ${{ steps.branch.outputs.branch == 'main' }}
+          if_true: ${{ secrets.SLACK_WEBHOOK }}
+          if_false: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Notify on Slack
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: ${{ steps.branch.outputs.branch }}
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: https://drive.google.com/drive/u/3/folders/achasa
+          SLACK_TITLE: Uploaded new ${{ steps.branch.outputs.value }} APK
+          SLACK_USERNAME: Naveen
+          SLACK_WEBHOOK: ${{ steps.slackwebhook.outputs.value }}
