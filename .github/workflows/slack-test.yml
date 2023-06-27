@@ -27,7 +27,7 @@ jobs:
           SLACK_CHANNEL: ${{ steps.branch.outputs.branch }}
           SLACK_COLOR: ${{ job.status }}
           SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: https://drive.google.com/drive/u/3/folders/achasa
+          SLACK_MESSAGE: erwttuyrytrytfh
           SLACK_TITLE: Uploaded new ${{ steps.branch.outputs.value }} APK
           SLACK_USERNAME: Naveen
           SLACK_WEBHOOK: ${{ steps.slackwebhook.outputs.value }}
