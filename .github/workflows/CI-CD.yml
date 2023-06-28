@@ -3,7 +3,7 @@ name: build_upload_notify
 on:
   push:
     branches:
-#      - main
+      - main
       - test
 
 jobs:
@@ -57,7 +57,7 @@ jobs:
       - name: Notify on Slack
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_CHANNEL: ${{ steps.branch.outputs.branch }}
+          SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
           SLACK_COLOR: ${{ job.status }}
           SLACK_ICON: https://github.com/rtCamp.png?size=48
           SLACK_MESSAGE: https://drive.google.com/drive/u/3/folders/${{ steps.folderId.outputs.value }}
